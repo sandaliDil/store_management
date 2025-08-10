@@ -4,12 +4,56 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f6a3e605-6030-416b-8af0-59ff0b22cf01" name="Changes" comment="" />
+    <list default="true" id="f6a3e605-6030-416b-8af0-59ff0b22cf01" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/store_management/store_management/controller/StoreController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/store_management/store_management/controller/summaryController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/store_management/store_management/database/DatabaseConnection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/store_management/store_management/dto/MonthlySummaryView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/store_management/store_management/entity/Branch.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/store_management/store_management/entity/MonthlySummary.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/store_management/store_management/entity/Product.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/store_management/store_management/entity/ProductRow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/store_management/store_management/entity/ProductStock.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/store_management/store_management/repository/BranchRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/store_management/store_management/repository/ProductRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/store_management/store_management/repository/ProductStockRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/store_management/store_management/service/StoreService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/store_management/store_management/store_view.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/store_management/store_management/summary.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/store_management/store_management/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/store_management/store_management/HelloApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="FxmlFile" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;sandaliDil&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/sandaliDil/store_management.git&quot;,
+    &quot;accountId&quot;: &quot;925315ec-12a4-4e67-ab81-729dc58b6555&quot;
+  }
+}</component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -17,21 +61,45 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 5
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="315NOKdv6TECGpFT7obZszgKUmf" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Admin/Desktop/office/cake order system"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.SM.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.store_management [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.store_management [install].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Admin/OneDrive/Desktop/store_management/src/main/java/com/store_management/store_management&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.store_management.store_management.controller" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Admin\OneDrive\Desktop\store_management\src\main\java\com\store_management\store_management" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="SM" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="com.store_management.store_management.HelloApplication" />
+      <module name="store_management" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

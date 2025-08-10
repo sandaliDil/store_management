@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="578.0" prefWidth="1093.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.store_management.store_management.controller.StoreController">
+
+    <Label layoutX="400.0" layoutY="23.0" text="Select Date:">
+      <font>
+         <Font size="17.0" />
+      </font></Label>
+    <DatePicker fx:id="datePicker" layoutX="518.0" layoutY="27.0" />
+
+    <Label layoutX="37.0" layoutY="23.0" text="Select Branch:">
+      <font>
+         <Font size="16.0" />
+      </font></Label>
+    <ComboBox fx:id="branchComboBox" layoutX="149.0" layoutY="27.0" prefWidth="200" />
+
+    <Button layoutX="757.0" layoutY="19.0" onAction="#saveProductStocks" prefHeight="33.0" prefWidth="60.0" text="Add" />
+
+    <Label layoutX="86.0" layoutY="168.0" />
+    <TableView fx:id="productTable1" layoutX="37.0" layoutY="111.0">
+        <columns>
+            <TableColumn fx:id="nameColumn1" text="Product Name" />
+            <TableColumn fx:id="quantityColumn1" text="Quantity" />
+        </columns>
+    </TableView>
+
+    <TableView fx:id="productTable2" layoutX="308.0" layoutY="111.0">
+        <columns>
+            <TableColumn fx:id="nameColumn2" text="Product Name" />
+            <TableColumn fx:id="quantityColumn2" text="Quantity" />
+        </columns>
+    </TableView>
+
+    <TableView fx:id="productTable3" layoutX="568.0" layoutY="105.0">
+        <columns>
+            <TableColumn fx:id="nameColumn3" text="Product Name" />
+            <TableColumn fx:id="quantityColumn3" text="Quantity" />
+        </columns>
+    </TableView>
+
+    <TableView fx:id="productTable4" layoutX="831.0" layoutY="97.0">
+        <columns>
+            <TableColumn fx:id="nameColumn4" text="Product Name" />
+            <TableColumn fx:id="quantityColumn4" text="Quantity" />
+        </columns>
+    </TableView>
+
+</AnchorPane>
