@@ -14,89 +14,91 @@ import java.util.List;
 public class ProductStockRepository {
 
 
-    public void saveAll(List<ProductStock> stocks) throws SQLException {
-        String insertSql = """
-            INSERT INTO product_stock (date, product_id, branch_id, quantity)
-            VALUES (?, ?, ?, ?)
-            ON DUPLICATE KEY UPDATE quantity = VALUES(quantity)
-            """;
-
-        try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(insertSql)) {
-
-            for (ProductStock stock : stocks) {
-                pstmt.setDate(1, java.sql.Date.valueOf(stock.getDate()));
-                pstmt.setInt(2, stock.getProductId());
-                pstmt.setInt(3, stock.getBranchId());
-                pstmt.setDouble(4, stock.getQuantity());
-                pstmt.addBatch();
-            }
-
-            pstmt.executeBatch();
-        }
-    }
-
-    public static List<MonthlySummary> getMonthlySummary(int year, int month) throws SQLException {
+    public void saveAll(List<ProductStock> productStocks) throws SQLException {
         String sql = """
-            SELECT branch_id, product_id, SUM(quantity) AS total_quantity
-            FROM product_stock
-            WHERE YEAR(date) = ? AND MONTH(date) = ?
-            GROUP BY branch_id, product_id
-            ORDER BY branch_id, product_id
+            INSERT INTO productStock (date, branch_code, product_code, quantity, return_quantity)
+            VALUES (?, ?, ?, ?, ?)
+            ON DUPLICATE KEY UPDATE
+                quantity = VALUES(quantity),
+                return_quantity = VALUES(return_quantity)
             """;
-
-        List<MonthlySummary> summaries = new ArrayList<>();
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1, year);
-            stmt.setInt(2, month);
-
-            ResultSet rs = stmt.executeQuery();
-
-            while (rs.next()) {
-                MonthlySummary summary = new MonthlySummary();
-                summary.setBranchId(rs.getInt("branch_id"));
-                summary.setProductId(rs.getInt("product_id"));
-                summary.setTotalQuantity(rs.getDouble("total_quantity"));
-                summaries.add(summary);
+            for (ProductStock ps : productStocks) {
+                stmt.setDate(1, java.sql.Date.valueOf(ps.getDate()));
+                stmt.setString(2, ps.getBranchCode());
+                stmt.setString(3, ps.getProductCode());
+                stmt.setDouble(4, ps.getQuantity());
+                stmt.setDouble(5, ps.getReturnQuantity());
+                stmt.addBatch();
             }
+            stmt.executeBatch();
         }
-
-        return summaries;
     }
 
-//    public List<MonthlySummary> findMonthlySummaryByBranch(int branchId, int year, int month) {
-//        List<MonthlySummary> summaries = new ArrayList<>();
+//    public static List<MonthlySummary> getMonthlySummary(int year, int month) throws SQLException {
 //        String sql = """
-//        SELECT p.product_id, p.name AS product_name, SUM(ps.quantity) AS total_quantity
-//        FROM product_stock ps
-//        JOIN product p ON ps.product_id = p.product_id
-//        WHERE ps.branch_id = ? AND YEAR(ps.date) = ? AND MONTH(ps.date) = ?
-//        GROUP BY p.product_id, p.name
-//        """;
+//            SELECT branch_id, product_id, SUM(quantity) AS total_quantity
+//            FROM product_stock
+//            WHERE YEAR(date) = ? AND MONTH(date) = ?
+//            GROUP BY branch_id, product_id
+//            ORDER BY branch_id, product_id
+//            """;
+//
+//        List<MonthlySummary> summaries = new ArrayList<>();
 //
 //        try (Connection conn = DatabaseConnection.getConnection();
 //             PreparedStatement stmt = conn.prepareStatement(sql)) {
 //
-//            stmt.setInt(1, branchId);
-//            stmt.setInt(2, year);
-//            stmt.setInt(3, month);
+//            stmt.setInt(1, year);
+//            stmt.setInt(2, month);
 //
-//            try (ResultSet rs = stmt.executeQuery()) {
-//                while (rs.next()) {
-//                    MonthlySummary summary = new MonthlySummary();
-//                    summary.setProductId(rs.getInt("product_id"));
-//                    summary.setProductName(rs.getString("product_name"));
-//                    summary.setTotalQuantity(rs.getDouble("total_quantity"));
-//                    summaries.add(summary);
-//                }
+//            ResultSet rs = stmt.executeQuery();
+//
+//            while (rs.next()) {
+//                MonthlySummary summary = new MonthlySummary();
+//                summary.setBranchId(rs.getInt("branch_id"));
+//                summary.setProductId(rs.getInt("product_id"));
+//                summary.setTotalQuantity(rs.getDouble("total_quantity"));
+//                summaries.add(summary);
 //            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
 //        }
+//
 //        return summaries;
 //    }
 
+    public List<MonthlySummary> findMonthlySummaryByBranch(int branchId, int year, int month) {
+        List<MonthlySummary> summaries = new ArrayList<>();
+
+        String sql = "SELECT branch_id, product_id, SUM(quantity) AS total_quantity " +
+                "FROM productStock " +
+                "WHERE branch_id = ? " +
+                "AND YEAR(date) = ? " +
+                "AND MONTH(date) = ? " +
+                "GROUP BY branch_id, product_id";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, branchId);
+            stmt.setInt(2, year);
+            stmt.setInt(3, month);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    MonthlySummary summary = new MonthlySummary();
+                    summary.setBranchId(rs.getInt("branch_id"));
+                    summary.setProductId(rs.getInt("product_id"));
+                    summary.setTotalQuantity(rs.getDouble("total_quantity"));
+                    summaries.add(summary);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return summaries;
+    }
 }

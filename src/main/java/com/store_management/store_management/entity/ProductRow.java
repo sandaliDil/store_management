@@ -3,24 +3,44 @@ package com.store_management.store_management.entity;
 import javafx.beans.property.*;
 
 public class ProductRow {
-    private final IntegerProperty productId;
+    private final StringProperty productCode;
     private final StringProperty name;
     private final DoubleProperty quantity;
+    private final DoubleProperty returnQuantity;  // new property
 
-    public ProductRow(int productId, String name) {
-        this.productId = new SimpleIntegerProperty(productId);
+
+    public ProductRow(String productCode, String name) {
+        this.productCode = new SimpleStringProperty(productCode);
         this.name = new SimpleStringProperty(name);
-        this.quantity = new SimpleDoubleProperty(0.0); // default 0.0
+        this.quantity = new SimpleDoubleProperty(0.0);
+        this.returnQuantity = new SimpleDoubleProperty(0.0);  // initialize new property
     }
 
-    public int getProductId() {
-        return productId.get();
+    public double getReturnQuantity() {
+        return returnQuantity.get();
     }
 
-    public IntegerProperty productIdProperty() {
-        return productId;
+    public DoubleProperty returnQuantityProperty() {
+        return returnQuantity;
     }
 
+    public void setReturnQuantity(double returnQuantity) {
+        this.returnQuantity.set(returnQuantity);
+    }
+
+    public String getProductCode() {
+        return productCode.get();
+    }
+
+    public StringProperty productCodeProperty() {
+        return productCode;
+    }
+
+    public void setProductCode(String productCode) {
+        this.productCode.set(productCode);
+    }
+
+    // name
     public String getName() {
         return name.get();
     }
@@ -29,6 +49,11 @@ public class ProductRow {
         return name;
     }
 
+    public void setName(String name) {
+        this.name.set(name);
+    }
+
+    // quantity
     public double getQuantity() {
         return quantity.get();
     }

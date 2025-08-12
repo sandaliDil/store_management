@@ -18,7 +18,7 @@ public class BranchRepository {
 
             while (rs.next()) {
                 Branch branch = new Branch();
-                branch.setBranchId(rs.getInt("branch_id"));
+                branch.setBranchCode(rs.getString("branch_code"));
                 branch.setBranchName(rs.getString("branch_name"));
                 branches.add(branch);
             }

@@ -5,26 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f6a3e605-6030-416b-8af0-59ff0b22cf01" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/store_management/store_management/controller/StoreController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/store_management/store_management/controller/summaryController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/store_management/store_management/database/DatabaseConnection.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/store_management/store_management/dto/MonthlySummaryView.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/store_management/store_management/entity/Branch.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/store_management/store_management/entity/MonthlySummary.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/store_management/store_management/entity/Product.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/store_management/store_management/entity/ProductRow.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/store_management/store_management/entity/ProductStock.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/store_management/store_management/repository/BranchRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/store_management/store_management/repository/ProductRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/store_management/store_management/repository/ProductStockRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/store_management/store_management/service/StoreService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/store_management/store_management/store_view.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/store_management/store_management/summary.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/store_management/store_management/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/store_management/store_management/HelloApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/store_management/store_management/controller/StoreController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/store_management/store_management/controller/StoreController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/store_management/store_management/controller/summaryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/store_management/store_management/controller/summaryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/store_management/store_management/entity/Branch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/store_management/store_management/entity/Branch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/store_management/store_management/entity/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/store_management/store_management/entity/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/store_management/store_management/entity/ProductRow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/store_management/store_management/entity/ProductRow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/store_management/store_management/entity/ProductStock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/store_management/store_management/entity/ProductStock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/store_management/store_management/repository/BranchRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/store_management/store_management/repository/BranchRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/store_management/store_management/repository/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/store_management/store_management/repository/ProductRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/store_management/store_management/repository/ProductStockRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/store_management/store_management/repository/ProductStockRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/store_management/store_management/service/StoreService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/store_management/store_management/service/StoreService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/store_management/store_management/store_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/store_management/store_management/store_view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/store_management/store_management/summary.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/store_management/store_management/summary.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

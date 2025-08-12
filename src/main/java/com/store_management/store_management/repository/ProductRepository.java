@@ -18,8 +18,8 @@ public class ProductRepository {
 
             while (rs.next()) {
                 Product product = new Product();
-                product.setProductId(rs.getInt("product_id"));
-                product.setName(rs.getString("name"));
+                product.setProductCode(rs.getString("product_code"));
+                product.setProductName(rs.getString("product_name"));
                 products.add(product);
             }
         } catch (SQLException e) {
@@ -29,14 +29,14 @@ public class ProductRepository {
     }
 
     public String findProductNameById(int productId) {
-        String sql = "SELECT name FROM product WHERE product_id = ?";
+        String sql = "SELECT product_name FROM product WHERE product_code = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, productId);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    return rs.getString("name");
+                    return rs.getString("product_name");
                 }
             }
         } catch (SQLException e) {

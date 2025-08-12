@@ -21,36 +21,43 @@
       <font>
          <Font size="16.0" />
       </font></Label>
-    <ComboBox fx:id="branchComboBox" layoutX="149.0" layoutY="27.0" prefWidth="200" />
+    <ComboBox fx:id="branchComboBox"  layoutX="149.0" layoutY="27.0" prefWidth="200" />
 
     <Button layoutX="757.0" layoutY="19.0" onAction="#saveProductStocks" prefHeight="33.0" prefWidth="60.0" text="Add" />
 
     <Label layoutX="86.0" layoutY="168.0" />
     <TableView fx:id="productTable1" layoutX="37.0" layoutY="111.0">
         <columns>
-            <TableColumn fx:id="nameColumn1" text="Product Name" />
-            <TableColumn fx:id="quantityColumn1" text="Quantity" />
+            <TableColumn fx:id="nameColumn1" prefWidth="152.0" text="Product Name" />
+            <TableColumn fx:id="quantityColumn1" prefWidth="95.0" text="Quantity" />
+            <TableColumn fx:id="returnQuantityColumn1" prefWidth="95.0" text="Return Quantity" />
         </columns>
     </TableView>
 
     <TableView fx:id="productTable2" layoutX="308.0" layoutY="111.0">
         <columns>
-            <TableColumn fx:id="nameColumn2" text="Product Name" />
-            <TableColumn fx:id="quantityColumn2" text="Quantity" />
+            <TableColumn fx:id="nameColumn2" prefWidth="131.0" text="Product Name" />
+            <TableColumn fx:id="quantityColumn2" prefWidth="116.0" text="Quantity" />
+            <TableColumn fx:id="returnQuantityColumn2" prefWidth="95.0" text="Return Quantity" />
+
         </columns>
     </TableView>
 
     <TableView fx:id="productTable3" layoutX="568.0" layoutY="105.0">
         <columns>
-            <TableColumn fx:id="nameColumn3" text="Product Name" />
-            <TableColumn fx:id="quantityColumn3" text="Quantity" />
+            <TableColumn fx:id="nameColumn3" prefWidth="157.0" text="Product Name" />
+            <TableColumn fx:id="quantityColumn3" prefWidth="75.0" text="Quantity" />
+            <TableColumn fx:id="returnQuantityColumn3" prefWidth="95.0" text="Return Quantity" />
+
         </columns>
     </TableView>
 
     <TableView fx:id="productTable4" layoutX="831.0" layoutY="97.0">
         <columns>
-            <TableColumn fx:id="nameColumn4" text="Product Name" />
-            <TableColumn fx:id="quantityColumn4" text="Quantity" />
+            <TableColumn fx:id="nameColumn4" prefWidth="145.0" text="Product Name" />
+            <TableColumn fx:id="quantityColumn4" prefWidth="102.0" text="Quantity" />
+            <TableColumn fx:id="returnQuantityColumn4" prefWidth="95.0" text="Return Quantity" />
+
         </columns>
     </TableView>
 

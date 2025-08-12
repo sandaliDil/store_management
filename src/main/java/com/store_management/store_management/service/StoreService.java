@@ -27,17 +27,19 @@ public class StoreService {
     private final ProductStockRepository productStockRepository = new ProductStockRepository();
 
     // Save product stocks through repository
-    public void saveProductStocks(List<ProductStock> stocks) throws SQLException {
-        if (stocks == null || stocks.isEmpty()) {
-            throw new IllegalArgumentException("Product stock list cannot be null or empty");
-        }
-
-        productStockRepository.saveAll(stocks);
+    public void saveProductStocks(List<ProductStock> productStocks) throws SQLException {
+        productStockRepository.saveAll(productStocks);
     }
 
-    public List<MonthlySummary> getMonthlySummary(int year, int month) throws SQLException {
-        return ProductStockRepository.getMonthlySummary(year, month);
+//    public List<MonthlySummary> getMonthlySummary(int year, int month) throws SQLException {
+//        return ProductStockRepository.getMonthlySummary(year, month);
+//    }
+
+    public List<MonthlySummary> getMonthlySummaryByBranch(int branchId, int year, int month) {
+        // Your repository call with branch filter
+        return productStockRepository.findMonthlySummaryByBranch(branchId, year, month);
     }
+
     public String getBranchNameById(int branchId) {
         return branchRepo.findBranchNameById(branchId);
     }

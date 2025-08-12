@@ -19,25 +19,28 @@ import java.util.stream.Collectors;
 public class StoreController {
 
     @FXML private DatePicker datePicker;
-
     @FXML private ComboBox<Branch> branchComboBox;
 
     // Four tables and their columns
     @FXML private TableView<ProductRow> productTable1;
     @FXML private TableColumn<ProductRow, String> nameColumn1;
     @FXML private TableColumn<ProductRow, Double> quantityColumn1;
+    @FXML private TableColumn<ProductRow, Double> returnQuantityColumn1;
 
     @FXML private TableView<ProductRow> productTable2;
     @FXML private TableColumn<ProductRow, String> nameColumn2;
     @FXML private TableColumn<ProductRow, Double> quantityColumn2;
+    @FXML private TableColumn<ProductRow, Double> returnQuantityColumn2;
 
     @FXML private TableView<ProductRow> productTable3;
     @FXML private TableColumn<ProductRow, String> nameColumn3;
     @FXML private TableColumn<ProductRow, Double> quantityColumn3;
+    @FXML private TableColumn<ProductRow, Double> returnQuantityColumn3;
 
     @FXML private TableView<ProductRow> productTable4;
     @FXML private TableColumn<ProductRow, String> nameColumn4;
     @FXML private TableColumn<ProductRow, Double> quantityColumn4;
+    @FXML private TableColumn<ProductRow, Double> returnQuantityColumn4;
 
     private final ProductRepository productRepository = new ProductRepository();
     private final StoreService storeService = new StoreService();
@@ -45,11 +48,11 @@ public class StoreController {
 
     @FXML
     public void initialize() {
-        // Load branches into ComboBox
+        // Load branches
         branchList = FXCollections.observableArrayList(storeService.getAllBranches());
         branchComboBox.setItems(branchList);
 
-        // Display branch names properly in ComboBox cells and button
+        // ComboBox display
         branchComboBox.setCellFactory(lv -> new ListCell<>() {
             @Override
             protected void updateItem(Branch branch, boolean empty) {
@@ -65,48 +68,44 @@ public class StoreController {
             }
         });
 
-        // Setup the 4 tables
+        // Setup 4 product tables (quantity columns)
         setupProductTable(productTable1, nameColumn1, quantityColumn1);
         setupProductTable(productTable2, nameColumn2, quantityColumn2);
         setupProductTable(productTable3, nameColumn3, quantityColumn3);
         setupProductTable(productTable4, nameColumn4, quantityColumn4);
 
-        // Load all products
+        // Setup 4 return quantity columns
+        setupReturnQuantityColumn(returnQuantityColumn1);
+        setupReturnQuantityColumn(returnQuantityColumn2);
+        setupReturnQuantityColumn(returnQuantityColumn3);
+        setupReturnQuantityColumn(returnQuantityColumn4);
+
+        // Load products and split into 4 lists
         List<ProductRow> allProducts = productRepository.findAllProducts()
                 .stream()
-                .map(p -> new ProductRow(p.getProductId(), p.getName()))
+                .map(p -> new ProductRow(p.getProductCode(), p.getProductName()))
                 .collect(Collectors.toList());
 
-        // Split products into 4 groups (max 10 each)
-        ObservableList<ProductRow> list1 = FXCollections.observableArrayList(allProducts.subList(0, Math.min(10, allProducts.size())));
-        ObservableList<ProductRow> list2 = FXCollections.observableArrayList(allProducts.size() > 10 ? allProducts.subList(10, Math.min(20, allProducts.size())) : List.of());
-        ObservableList<ProductRow> list3 = FXCollections.observableArrayList(allProducts.size() > 20 ? allProducts.subList(20, Math.min(30, allProducts.size())) : List.of());
-        ObservableList<ProductRow> list4 = FXCollections.observableArrayList(allProducts.size() > 30 ? allProducts.subList(30, Math.min(40, allProducts.size())) : List.of());
-
-        productTable1.setItems(list1);
-        productTable2.setItems(list2);
-        productTable3.setItems(list3);
-        productTable4.setItems(list4);
+        productTable1.setItems(FXCollections.observableArrayList(allProducts.subList(0, Math.min(10, allProducts.size()))));
+        productTable2.setItems(FXCollections.observableArrayList(allProducts.size() > 10 ? allProducts.subList(10, Math.min(20, allProducts.size())) : List.of()));
+        productTable3.setItems(FXCollections.observableArrayList(allProducts.size() > 20 ? allProducts.subList(20, Math.min(30, allProducts.size())) : List.of()));
+        productTable4.setItems(FXCollections.observableArrayList(allProducts.size() > 30 ? allProducts.subList(30, Math.min(40, allProducts.size())) : List.of()));
     }
 
     private void setupProductTable(TableView<ProductRow> table, TableColumn<ProductRow, String> nameCol, TableColumn<ProductRow, Double> qtyCol) {
-        // Name column setup
         nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-
-        // Quantity column setup with editable TextField cells
         qtyCol.setCellValueFactory(new PropertyValueFactory<>("quantity"));
-        qtyCol.setCellFactory(col -> new TableCell<ProductRow, Double>() {
+
+        qtyCol.setCellFactory(col -> new TableCell<>() {
             private final TextField textField = new TextField();
 
             {
                 textField.setMaxWidth(80);
 
                 textField.focusedProperty().addListener((obs, oldFocused, newFocused) -> {
-                    if (newFocused) {
-                        if ("0.00".equals(textField.getText())) {
-                            textField.clear();
-                        }
-                    } else {
+                    if (newFocused && "0.000".equals(textField.getText())) {
+                        textField.clear();
+                    } else if (!newFocused) {
                         saveAndFormat();
                     }
                 });
@@ -120,8 +119,7 @@ public class StoreController {
 
                 textField.setOnAction(event -> {
                     saveAndFormat();
-                    int currentIndex = getIndex();
-                    int nextIndex = currentIndex + 1;
+                    int nextIndex = getIndex() + 1;
                     if (nextIndex < getTableView().getItems().size()) {
                         getTableView().edit(nextIndex, qtyCol);
                         getTableView().getSelectionModel().select(nextIndex);
@@ -133,17 +131,12 @@ public class StoreController {
                 String text = textField.getText();
                 double value;
                 try {
-                    if (text == null || text.equals(".") || text.isEmpty()) {
-                        value = 0.0;
-                    } else {
-                        value = Double.parseDouble(text);
-                    }
+                    value = (text == null || text.equals(".") || text.isEmpty()) ? 0.0 : Double.parseDouble(text);
                 } catch (NumberFormatException e) {
                     value = 0.0;
                 }
-                textField.setText(String.format("%.2f", value));
-                ProductRow currentRow = getTableView().getItems().get(getIndex());
-                currentRow.setQuantity(value);
+                textField.setText(String.format("%.3f", value));
+                getTableView().getItems().get(getIndex()).setQuantity(value);
             }
 
             @Override
@@ -152,7 +145,66 @@ public class StoreController {
                 if (empty || qty == null) {
                     setGraphic(null);
                 } else {
-                    textField.setText(String.format("%.2f", qty));
+                    textField.setText(String.format("%.3f", qty));
+                    setGraphic(textField);
+                }
+            }
+        });
+    }
+
+    private void setupReturnQuantityColumn(TableColumn<ProductRow, Double> returnQtyCol) {
+        returnQtyCol.setCellValueFactory(new PropertyValueFactory<>("returnQuantity"));
+
+        returnQtyCol.setCellFactory(col -> new TableCell<>() {
+            private final TextField textField = new TextField();
+
+            {
+                textField.setMaxWidth(80);
+
+                textField.focusedProperty().addListener((obs, oldFocused, newFocused) -> {
+                    if (newFocused && "0.000".equals(textField.getText())) {
+                        textField.clear();
+                    } else if (!newFocused) {
+                        saveAndFormat();
+                    }
+                });
+
+                textField.textProperty().addListener((obs, oldVal, newVal) -> {
+                    if (newVal == null || newVal.isEmpty()) return;
+                    if (!newVal.matches("\\d*\\.?\\d*")) {
+                        textField.setText(oldVal);
+                    }
+                });
+
+                textField.setOnAction(event -> {
+                    saveAndFormat();
+                    int nextIndex = getIndex() + 1;
+                    if (nextIndex < getTableView().getItems().size()) {
+                        getTableView().edit(nextIndex, returnQtyCol);
+                        getTableView().getSelectionModel().select(nextIndex);
+                    }
+                });
+            }
+
+            private void saveAndFormat() {
+                String text = textField.getText();
+                double value;
+                try {
+                    value = (text == null || text.equals(".") || text.isEmpty()) ? 0.0 : Double.parseDouble(text);
+                } catch (NumberFormatException e) {
+                    value = 0.0;
+                }
+                textField.setText(String.format("%.3f", value));
+                getTableView().getItems().get(getIndex()).setReturnQuantity(value);
+            }
+
+            @Override
+            protected void updateItem(Double qty, boolean empty) {
+                super.updateItem(qty, empty);
+                if (empty || qty == null) {
+                    setGraphic(null);
+                } else {
+                    textField.setText(String.format("%.3f", qty));
                     setGraphic(textField);
                 }
             }
@@ -188,25 +240,23 @@ public class StoreController {
                 .map(pr -> {
                     ProductStock ps = new ProductStock();
                     ps.setDate(selectedDate);
-                    ps.setBranchId(selectedBranch.getBranchId());
-                    ps.setProductId(pr.getProductId());
+                    ps.setBranchCode(selectedBranch.getBranchCode());
+                    ps.setProductCode(pr.getProductCode());
                     ps.setQuantity(pr.getQuantity());
+                    ps.setReturnQuantity(pr.getReturnQuantity());
                     return ps;
                 })
                 .toList();
 
         try {
             storeService.saveProductStocks(productStockList);
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Success");
-            alert.setHeaderText(null);
-            alert.setContentText("Product stock data saved successfully.");
-            alert.showAndWait();
+            showInfo("Product stock data saved successfully.");
         } catch (Exception e) {
             e.printStackTrace();
             showAlert("Failed to save product stock data: " + e.getMessage());
         }
     }
+
 
     private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -216,4 +266,11 @@ public class StoreController {
         alert.showAndWait();
     }
 
+    private void showInfo(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Success");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
 }
